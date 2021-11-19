@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Controllers
+namespace Livestream_Backend_application.Controllers
 {
     [ApiController]
     [Route("[controller]")]
