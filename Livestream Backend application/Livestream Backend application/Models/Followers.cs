@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace Livestream_Backend_application.Models
 {
-    public class Followers
+    public partial class Followers
     {
-        public int followers_id { get; set; }
-        public int user_id { get; set; }
-
-        public int follower_id { get; set; }
+        public int FollowersId { get; set; }
+        public int UserdId { get; set; }
+        public string FollowerId { get; set; }
     }
 }

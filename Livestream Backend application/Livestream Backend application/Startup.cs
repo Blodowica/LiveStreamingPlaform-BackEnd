@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
+using Livestream_Backend_application.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Livestream_Backend_application
 {
@@ -28,7 +30,9 @@ namespace Livestream_Backend_application
         {
             services.AddControllers();
 
-          
+            var connection = Configuration.GetConnectionString("LivestreamDataBase");
+            services.AddDbContextPool<LivestreamDBContext>(options => options.UseSqlServer(connection));
+            services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {
