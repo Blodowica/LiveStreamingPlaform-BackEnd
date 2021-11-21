@@ -20,6 +20,7 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
+        working-directory: ./Livestream Backend application
 
       - name: Build app
         run: dotnet build -c Release --no restore
