@@ -24,3 +24,4 @@ jobs:
 
       - name: Build app
         run: dotnet build -c Release --no restore
+        working-directory: ./Livestream Backend application
