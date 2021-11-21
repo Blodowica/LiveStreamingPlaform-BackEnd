@@ -1,6 +1,6 @@
 using System;
 
-namespace WebApplication1
+namespace Livestream_Backend_application
 {
     public class WeatherForecast
     {
