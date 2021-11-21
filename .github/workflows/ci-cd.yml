@@ -1,1 +1,20 @@
+name: Continuos Intergratopn and Deployment
 
+#this action should be run when something is pushed to the main branch 
+on:
+   push:
+       branches:
+        - main
+          
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+     - name: check out code
+       uses: actions/checkout@v2
+     
+
+     - name: Setup .NET 3
+       uses: actions/setup-dotnet@v1
+       with:
+              dotnet-version: '3.1.x'
