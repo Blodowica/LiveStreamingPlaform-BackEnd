@@ -25,3 +25,7 @@ jobs:
       - name: Build app
         run: dotnet build -c Release --no-restore
         working-directory: ./Livestream Backend application
+
+      - name: Run Automated test
+        run: dotnet test -c Release --no-build
+        working-directory: ./Livestream Backend application
