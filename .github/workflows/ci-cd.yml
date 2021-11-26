@@ -30,24 +30,24 @@ jobs:
         run: dotnet test -c Release --no-build
         working-directory: ./Livestream Backend application
         
-      - name: Publish app
-        run: dotnet publish -c -o ./out
-        working-directory: ./Livestream Backend application
+     #  - name: Publish app
+       #  run: dotnet publish -c -o ./out
+        # working-directory: ./Livestream Backend application
         
-        
-      - name: Deploy to Azure 
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+#       - name: Deploy to Azure 
+ #        uses: azure/login@v1
+  #       with:
+   #        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - uses: azure/sql-action@v1
-        with:
+#       - uses: azure/sql-action@v1
+  #       with:
         
-          server-name: SQL_SERVER_NAME
-          connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-          dacpac-package: './Database.dacpac'
+    #       server-name: SQL_SERVER_NAME
+      #     connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        #   dacpac-package: './Database.dacpac'
 
       # Azure logout 
-      - name: logout
-        run: |
-          az logout
+      # - name: logout
+       #  run: |
+        #   az logout
