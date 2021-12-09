@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using Livestream_Backend_application.Models;
 using Microsoft.EntityFrameworkCore;
+using Livestream_Backend_application.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Livestream_Backend_application
 {
@@ -28,17 +31,26 @@ namespace Livestream_Backend_application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(opt =>
+            {
+
+                //THE POLICY MAKES IT SO THAT EVERY SINGLE ENDPOINT REQUIRES AUTHORIZATION !
+
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            
+            });
 
             var connection = Configuration.GetConnectionString("LivestreamDataBase");
-            services.AddDbContextPool<LivestreamDBContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<LivestreamDBContext>(options => options.UseSqlServer(connection));
             services.AddControllers();
+            services.AddIdentityServices(Configuration);
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Zomato API",
+                    Title = "Rave Livestream API",
                     Version = "v1",
                     Description = "Description for the API goes here.",
                     Contact = new OpenApiContact
@@ -78,6 +90,7 @@ namespace Livestream_Backend_application
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

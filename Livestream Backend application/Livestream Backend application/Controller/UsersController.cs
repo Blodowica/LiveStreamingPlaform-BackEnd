@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Livestream_Backend_application.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Livestream_Backend_application.Controller
 {
@@ -26,7 +27,7 @@ namespace Livestream_Backend_application.Controller
         {
             return await _context.Users.ToListAsync();
         }
-
+        [Authorize]
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Users>> GetUsers(int id)

@@ -1,4 +1,6 @@
 ﻿using System;
+using Livestream_Backend_application.DataTransfer;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -8,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Livestream_Backend_application.Models
 {
-    public partial class LivestreamDBContext : DbContext
+    public partial class LivestreamDBContext : IdentityDbContext<AppUser>
     {
         
 
@@ -19,7 +21,7 @@ namespace Livestream_Backend_application.Models
 
         public virtual DbSet<Followers> Followers { get; set; }
         public virtual DbSet<Streams> Streams { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
 
       
 
@@ -103,9 +105,11 @@ namespace Livestream_Backend_application.Models
                     .IsUnicode(false);
             });
 
-            OnModelCreatingPartial(modelBuilder);
+           // OnModelCreatingPartial(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
     }
 }
