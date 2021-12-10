@@ -31,15 +31,7 @@ namespace Livestream_Backend_application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(opt =>
-            {
-
-                //THE POLICY MAKES IT SO THAT EVERY SINGLE ENDPOINT REQUIRES AUTHORIZATION !
-
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                opt.Filters.Add(new AuthorizeFilter(policy));
-            
-            });
+            services.AddControllers();
 
             var connection = Configuration.GetConnectionString("LivestreamDataBase");
             services.AddDbContext<LivestreamDBContext>(options => options.UseSqlServer(connection));
