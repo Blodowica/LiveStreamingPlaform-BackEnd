@@ -53,6 +53,16 @@ namespace Livestream_Backend_application
                     },
                 });
             });
+
+            services.AddCors(option =>
+            {
+                option.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+
+
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +90,8 @@ namespace Livestream_Backend_application
             });
 
             app.UseHttpsRedirection();
+            
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
             app.UseAuthentication();

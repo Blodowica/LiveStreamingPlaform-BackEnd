@@ -27,7 +27,7 @@ namespace Livestream_Backend_application.Controller
         {
             return await _context.Users.ToListAsync();
         }
-        [Authorize]
+        
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Users>> GetUsers(int id)
