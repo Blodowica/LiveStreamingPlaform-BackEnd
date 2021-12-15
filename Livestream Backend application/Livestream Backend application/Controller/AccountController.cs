@@ -56,7 +56,7 @@ namespace Livestream_Backend_application.Controller
         {
             if (await _userManger.Users.AnyAsync(x => x.Email == registerDto.Email)) return BadRequest("Email Taken");
             if (await _userManger.Users.AnyAsync(x => x.UserName == registerDto.UserName)) return BadRequest("UserName Taken");
-            if (await _userManger.Users.AnyAsync(x => x.StreamKey == registerDto.StreamKey)) return BadRequest("Error Creating Streamkey");
+           // if (await _userManger.Users.AnyAsync(x => x.StreamKey == registerDto.StreamKey)) return BadRequest("Error Creating Streamkey");
 
             var user = new AppUser
             {
