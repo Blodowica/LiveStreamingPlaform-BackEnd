@@ -12,7 +12,7 @@ namespace Livestream_Backend_application.Models
 {
     public partial class LivestreamDBContext : IdentityDbContext<AppUser>
     {
-        
+
 
         public LivestreamDBContext(DbContextOptions<LivestreamDBContext> options)
             : base(options)
@@ -22,7 +22,7 @@ namespace Livestream_Backend_application.Models
         public virtual DbSet<Followers> Followers { get; set; }
         public virtual DbSet<Streams> Streams { get; set; }
         public DbSet<Users> Users { get; set; }
-
+        public DbSet<AppUser> appUsers {get; set;}
       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

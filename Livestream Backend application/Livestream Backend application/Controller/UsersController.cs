@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Livestream_Backend_application.Models;
 using Microsoft.AspNetCore.Authorization;
+using Livestream_Backend_application.DataTransfer;
 
 namespace Livestream_Backend_application.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly LivestreamDBContext _context;
@@ -23,30 +25,30 @@ namespace Livestream_Backend_application.Controller
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.appUsers.ToListAsync();
         }
         
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUsers(int id)
+        public async Task<ActionResult<AppUser>> GetUsers(string id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = await _context.appUsers.FindAsync(id);
 
-            if (users == null)
+            if (users != null)
             {
-                return NotFound();
+              return  users;
             }
 
-            return users;
+                return BadRequest("Something went wrong!");
         }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(int id, Users users)
+        public async Task<ActionResult<AppUser>> PutUsers(int id, Users users)
         {
             if (id != users.UsersId)
             {
@@ -78,25 +80,25 @@ namespace Livestream_Backend_application.Controller
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
+        public async Task<ActionResult<AppUser>> PostUsers(AppUser users)
         {
-            _context.Users.Add(users);
+            _context.appUsers.Add(users);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsers", new { id = users.UsersId }, users);
+            return CreatedAtAction("GetUsers", new { id = users.Id }, users);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Users>> DeleteUsers(int id)
+        public async Task<ActionResult<AppUser>> DeleteUsers(string id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = await _context.appUsers.FindAsync(id);
             if (users == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(users);
+            _context.appUsers.Remove(users);
             await _context.SaveChangesAsync();
 
             return users;
