@@ -27,8 +27,8 @@ jobs:
         working-directory: ./Livestream Backend application
         
       - name: Starting Unit Tests dotnet
-        run: dotnet test --no-build
-        working-directory: ./Livestream Backend application/LiveStreamBackend.Test
+        run: dotnet test -c Release --no-build
+        working-directory: ./Livestream Backend application
         
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
