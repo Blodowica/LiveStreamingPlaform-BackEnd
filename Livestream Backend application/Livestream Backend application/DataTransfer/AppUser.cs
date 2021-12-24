@@ -11,7 +11,7 @@ namespace Livestream_Backend_application.DataTransfer
     {
         public string FirstName  { get; set; }
 
-        public string   Lastname{ get; set; }
+        public string  Lastname{ get; set; }
 
         public string   StreamKey{ get; set; }
 

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livestream Backend application", "Livestream Backend application\Livestream Backend application.csproj", "{B19657E7-C271-451E-BD12-F9CF77B7EEDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveStreamingPlatform.tests", "LiveStreamingPlatform.tests\LiveStreamingPlatform.tests.csproj", "{68944CCF-D238-4815-AB17-27CE33FFD676}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveStreamBackend.Test", "LiveStreamBackend.Test\LiveStreamBackend.Test.csproj", "{B552F20D-F93A-4C08-86C9-7B147D2A2E2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B19657E7-C271-451E-BD12-F9CF77B7EEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B19657E7-C271-451E-BD12-F9CF77B7EEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B19657E7-C271-451E-BD12-F9CF77B7EEDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68944CCF-D238-4815-AB17-27CE33FFD676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68944CCF-D238-4815-AB17-27CE33FFD676}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68944CCF-D238-4815-AB17-27CE33FFD676}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68944CCF-D238-4815-AB17-27CE33FFD676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B552F20D-F93A-4C08-86C9-7B147D2A2E2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B552F20D-F93A-4C08-86C9-7B147D2A2E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B552F20D-F93A-4C08-86C9-7B147D2A2E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B552F20D-F93A-4C08-86C9-7B147D2A2E2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -47,33 +47,23 @@ namespace Livestream_Backend_application.Controller
         // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<ActionResult<AppUser>> PutUsers(int id, Users users)
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult<AppUser>> PutUsers(string id, AppUser users)
         {
-            if (id != users.UsersId)
+            var foundUser = await _context.appUsers.FirstOrDefaultAsync(u => u.Id == id);
+            if (foundUser == null)
             {
-                return BadRequest();
+               return BadRequest("No user found with given id");
             }
+            foundUser.FirstName = users.FirstName;
+            foundUser.Lastname = users.Lastname;
+            foundUser.Email = users.Email;
+            foundUser.UserName = users.UserName;
 
-            _context.Entry(users).State = EntityState.Modified;
+            _context.Update(foundUser);
+           await  _context.SaveChangesAsync();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return foundUser;
         }
 
         // POST: api/Users
@@ -104,9 +94,9 @@ namespace Livestream_Backend_application.Controller
             return users;
         }
 
-        private bool UsersExists(int id)
+        private bool UsersExists(string id)
         {
-            return _context.Users.Any(e => e.UsersId == id);
+            return _context.appUsers.Any(e => e.Id == id);
         }
     }
 }

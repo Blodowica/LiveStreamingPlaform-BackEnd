@@ -92,9 +92,11 @@ namespace Livestream_Backend_application.Controller
         {
             return new UserDto
             {
+                Id = user.Id,
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.Lastname,
+                Email= user.Email,
                 Image = null,
                 Token = _tokenService.CreateToken(user)
             };
