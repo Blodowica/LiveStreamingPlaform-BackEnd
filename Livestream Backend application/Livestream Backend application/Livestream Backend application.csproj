@@ -6,6 +6,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211228131502_AddedStreamsUpdate.cs" />
+    <Compile Remove="Migrations\20211228131502_AddedStreamsUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20211228133752_AddedStreamUserRelationship.cs" />
+    <Compile Remove="Migrations\20211228133752_AddedStreamUserRelationship.Designer.cs" />
+    <Compile Remove="Migrations\20211228133902_AddedStreamUserRelationshipUpdate.cs" />
+    <Compile Remove="Migrations\20211228133902_AddedStreamUserRelationshipUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20211228135646_AddedStreamUserRelationshipNew.cs" />
+    <Compile Remove="Migrations\20211228135646_AddedStreamUserRelationshipNew.Designer.cs" />
+    <Compile Remove="Migrations\20211228141052_AddedStreamUserRelationship.cs" />
+    <Compile Remove="Migrations\20211228141052_AddedStreamUserRelationship.Designer.cs" />
+    <Compile Remove="Migrations\20211228141422_AddedStreamUserRelationship.cs" />
+    <Compile Remove="Migrations\20211228141422_AddedStreamUserRelationship.Designer.cs" />
+    <Compile Remove="Migrations\20211228141942_AddedStreamUserRelationshipNew.cs" />
+    <Compile Remove="Migrations\20211228141942_AddedStreamUserRelationshipNew.Designer.cs" />
+    <Compile Remove="Migrations\20211228144744_AddedStreamUserRelatioship.cs" />
+    <Compile Remove="Migrations\20211228144744_AddedStreamUserRelatioship.Designer.cs" />
+    <Compile Remove="Migrations\20211228150157_AddedStreamTable.cs" />
+    <Compile Remove="Migrations\20211228150157_AddedStreamTable.Designer.cs" />
+    <Compile Remove="Migrations\20211228152505_AddedStreamUserRelatopnship.cs" />
+    <Compile Remove="Migrations\20211228152505_AddedStreamUserRelatopnship.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.18" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />

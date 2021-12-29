@@ -4,14 +4,16 @@ using Livestream_Backend_application.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Livestream_Backend_application.Migrations
 {
     [DbContext(typeof(LivestreamDBContext))]
-    partial class LivestreamDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211228114855_AddedStreamId")]
+    partial class AddedStreamId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,39 +101,6 @@ namespace Livestream_Backend_application.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Livestream_Backend_application.Models.AppStreams", b =>
-                {
-                    b.Property<int>("StreamId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("stream_id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnName("description")
-                        .HasColumnType("varchar(250)")
-                        .HasMaxLength(250)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Title")
-                        .HasColumnName("title")
-                        .HasColumnType("varchar(20)")
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
-                    b.Property<string>("UserId")
-                        .HasColumnName("user_id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("StreamId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[user_id] IS NOT NULL");
-
-                    b.ToTable("Streams");
-                });
-
             modelBuilder.Entity("Livestream_Backend_application.Models.Followers", b =>
                 {
                     b.Property<int>("FollowersId")
@@ -153,6 +122,35 @@ namespace Livestream_Backend_application.Migrations
                     b.HasKey("FollowersId");
 
                     b.ToTable("Followers");
+                });
+
+            modelBuilder.Entity("Livestream_Backend_application.Models.Streams", b =>
+                {
+                    b.Property<int>("StreamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("stream_id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnName("description")
+                        .HasColumnType("varchar(250)")
+                        .HasMaxLength(250)
+                        .IsUnicode(false);
+
+                    b.Property<string>("Title")
+                        .HasColumnName("title")
+                        .HasColumnType("varchar(20)")
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
+                    b.Property<int>("UserId")
+                        .HasColumnName("user_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("StreamId");
+
+                    b.ToTable("Streams");
                 });
 
             modelBuilder.Entity("Livestream_Backend_application.Models.Users", b =>
@@ -197,6 +195,9 @@ namespace Livestream_Backend_application.Migrations
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20)
                         .IsUnicode(false);
+
+                    b.Property<int>("StreamId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Streamkey")
                         .IsRequired()
@@ -346,13 +347,6 @@ namespace Livestream_Backend_application.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Livestream_Backend_application.Models.AppStreams", b =>
-                {
-                    b.HasOne("Livestream_Backend_application.DataTransfer.AppUser", "AppUser")
-                        .WithOne("Streams")
-                        .HasForeignKey("Livestream_Backend_application.Models.AppStreams", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

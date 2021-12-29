@@ -20,7 +20,7 @@ namespace Livestream_Backend_application.Models
         }
 
         public virtual DbSet<Followers> Followers { get; set; }
-        public virtual DbSet<Streams> Streams { get; set; }
+        public virtual DbSet<AppStreams> Streams { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<AppUser> appUsers {get; set;}
       
@@ -39,7 +39,7 @@ namespace Livestream_Backend_application.Models
                 entity.Property(e => e.UserdId).HasColumnName("userd_id");
             });
 
-            modelBuilder.Entity<Streams>(entity =>
+            modelBuilder.Entity<AppStreams>(entity =>
             {
                 entity.HasKey(e => e.StreamId);
 
@@ -55,8 +55,24 @@ namespace Livestream_Backend_application.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+    
+
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
             });
+
+
+            modelBuilder.Entity<AppUser>(entity =>
+            {
+                entity.HasOne(s => s.Streams)
+                 .WithOne(u => u.AppUser)
+                 .HasForeignKey<AppStreams>(k => k.UserId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+    
+            });
+          
+
+           
 
             modelBuilder.Entity<Users>(entity =>
             {
@@ -103,7 +119,12 @@ namespace Livestream_Backend_application.Models
                     .HasColumnName("username")
                     .HasMaxLength(25)
                     .IsUnicode(false);
+
             });
+
+           
+
+         
 
            // OnModelCreatingPartial(modelBuilder);
             base.OnModelCreating(modelBuilder);

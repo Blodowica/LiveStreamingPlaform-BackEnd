@@ -4,14 +4,16 @@ using Livestream_Backend_application.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Livestream_Backend_application.Migrations
 {
     [DbContext(typeof(LivestreamDBContext))]
-    partial class LivestreamDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211228151144_AddedStreamTable")]
+    partial class AddedStreamTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,13 +123,9 @@ namespace Livestream_Backend_application.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnName("user_id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StreamId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[user_id] IS NOT NULL");
 
                     b.ToTable("Streams");
                 });
@@ -346,13 +344,6 @@ namespace Livestream_Backend_application.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Livestream_Backend_application.Models.AppStreams", b =>
-                {
-                    b.HasOne("Livestream_Backend_application.DataTransfer.AppUser", "AppUser")
-                        .WithOne("Streams")
-                        .HasForeignKey("Livestream_Backend_application.Models.AppStreams", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

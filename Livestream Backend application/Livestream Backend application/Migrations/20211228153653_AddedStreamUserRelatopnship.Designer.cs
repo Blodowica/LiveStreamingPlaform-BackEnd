@@ -4,14 +4,16 @@ using Livestream_Backend_application.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Livestream_Backend_application.Migrations
 {
     [DbContext(typeof(LivestreamDBContext))]
-    partial class LivestreamDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211228153653_AddedStreamUserRelatopnship")]
+    partial class AddedStreamUserRelatopnship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,6 +98,9 @@ namespace Livestream_Backend_application.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("StreamId")
+                        .IsUnique();
+
                     b.ToTable("AspNetUsers");
                 });
 
@@ -121,13 +126,9 @@ namespace Livestream_Backend_application.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnName("user_id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StreamId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[user_id] IS NOT NULL");
 
                     b.ToTable("Streams");
                 });
@@ -153,6 +154,32 @@ namespace Livestream_Backend_application.Migrations
                     b.HasKey("FollowersId");
 
                     b.ToTable("Followers");
+                });
+
+            modelBuilder.Entity("Livestream_Backend_application.Models.Streams", b =>
+                {
+                    b.Property<int>("StreamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StreamId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Streams1");
                 });
 
             modelBuilder.Entity("Livestream_Backend_application.Models.Users", b =>
@@ -205,6 +232,9 @@ namespace Livestream_Backend_application.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<int?>("StreamsStreamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnName("username")
@@ -213,6 +243,8 @@ namespace Livestream_Backend_application.Migrations
                         .IsUnicode(false);
 
                     b.HasKey("UsersId");
+
+                    b.HasIndex("StreamsStreamId");
 
                     b.ToTable("Users");
                 });
@@ -348,11 +380,27 @@ namespace Livestream_Backend_application.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Livestream_Backend_application.Models.AppStreams", b =>
+            modelBuilder.Entity("Livestream_Backend_application.DataTransfer.AppUser", b =>
+                {
+                    b.HasOne("Livestream_Backend_application.Models.AppStreams", "Streams")
+                        .WithOne("AppUser")
+                        .HasForeignKey("Livestream_Backend_application.DataTransfer.AppUser", "StreamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Livestream_Backend_application.Models.Streams", b =>
                 {
                     b.HasOne("Livestream_Backend_application.DataTransfer.AppUser", "AppUser")
-                        .WithOne("Streams")
-                        .HasForeignKey("Livestream_Backend_application.Models.AppStreams", "UserId");
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("Livestream_Backend_application.Models.Users", b =>
+                {
+                    b.HasOne("Livestream_Backend_application.Models.Streams", "Streams")
+                        .WithMany()
+                        .HasForeignKey("StreamsStreamId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
