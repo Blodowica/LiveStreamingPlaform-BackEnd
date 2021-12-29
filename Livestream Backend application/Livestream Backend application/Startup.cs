@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Livestream_Backend_application.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Livestream_Backend_application.AppContext;
 
 namespace Livestream_Backend_application
 {
@@ -37,7 +38,7 @@ namespace Livestream_Backend_application
             services.AddDbContext<LivestreamDBContext>(options => options.UseSqlServer(connection));
             services.AddControllers();
             services.AddIdentityServices(Configuration);
-
+         
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -102,10 +103,8 @@ namespace Livestream_Backend_application
             {
                 endpoints.MapControllers();
             });
-            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                scope.ServiceProvider.GetRequiredService<LivestreamDBContext>().Database.Migrate();
-            }
+            //Try to apply migrations upon startup
+            PrepDb.PrepMigration(app);
         }
     }
 }
