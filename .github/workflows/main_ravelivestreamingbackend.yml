@@ -30,6 +30,13 @@ jobs:
         run: dotnet test -c Release --no-build
         working-directory: ./Livestream Backend application
         
+      - name: Update database
+        run: |
+         dotnet tool install --global dotnet-ef
+         dotnet tool restore
+         dotnet ef database update
+        working-directory: ./Livestream Backend application
+        
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
         working-directory: ./Livestream Backend application
