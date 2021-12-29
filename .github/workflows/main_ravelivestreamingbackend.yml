@@ -29,21 +29,8 @@ jobs:
       - name: Starting Unit Tests dotnet
         run: dotnet test -c Release --no-build
         working-directory: ./Livestream Backend application
-        
-      - name: Install ef Tools
-        run: dotnet tool install --global dotnet-ef
-        working-directory: ./Livestream Backend application
-       
-      - name: IRestore ef Tools
-        run: dotnet tool restore
-        working-directory: ./Livestream Backend application
-        
-      - name: Update Database
-        run:  dotnet ef database update
-        working-directory: ./Livestream Backend application
-        
-        
-        
+
+         
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
         working-directory: ./Livestream Backend application
