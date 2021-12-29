@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Livestream_Backend_application.Models
 {
-    public partial class Users: IdentityUser
+    public partial class Users
     {
         public int UsersId { get; set; }
         public string Firstname { get; set; }
@@ -17,7 +17,8 @@ namespace Livestream_Backend_application.Models
         public string Password { get; set; }
         public string Streamkey { get; set; }
         public string Role { get; set; }
-//        public  Streams Streams { get; set; }
+        public string Email { get;  set; }
+        //        public  Streams Streams { get; set; }
 
     }
 }
