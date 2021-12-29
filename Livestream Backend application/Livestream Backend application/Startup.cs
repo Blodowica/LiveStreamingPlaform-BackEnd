@@ -102,6 +102,10 @@ namespace Livestream_Backend_application
             {
                 endpoints.MapControllers();
             });
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<LivestreamDBContext>().Database.Migrate();
+            }
         }
     }
 }
