@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Livestream_Backend_application.Models;
+using Livestream_Backend_application.Services.Interfaces;
 
 namespace Livestream_Backend_application.Controller
 {
@@ -15,10 +16,12 @@ namespace Livestream_Backend_application.Controller
     public class StreamsController : ControllerBase
     {
         private readonly LivestreamDBContext _context;
+        private readonly IUserStreamService _userStreamService;
 
-        public StreamsController(LivestreamDBContext context)
+        public StreamsController(LivestreamDBContext context, IUserStreamService userStreamService)
         {
             _context = context;
+            _userStreamService = userStreamService;
         }
 
         // GET: api/Streams
@@ -101,7 +104,22 @@ namespace Livestream_Backend_application.Controller
 
             return streams;
         }
+        [HttpGet("user-stream/{UserId}")]
+        public async Task<ActionResult> GetUserStream(string UserId)
+        {
+            try
+            {
+                var stream = await _userStreamService.getUserStreamResponse(UserId);
+                return Ok(stream);
 
+            }
+            catch (Exception ex )
+            {
+
+                return BadRequest(new { message = ex.Message });
+            }
+        
+        }
         private bool StreamsExists(int id)
         {
             return _context.Streams.Any(e => e.StreamId == id);

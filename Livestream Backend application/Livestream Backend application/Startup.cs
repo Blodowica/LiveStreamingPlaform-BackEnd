@@ -17,6 +17,8 @@ using Livestream_Backend_application.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Livestream_Backend_application.AppContext;
+using Livestream_Backend_application.Services.Interfaces;
+using Livestream_Backend_application.Services;
 
 namespace Livestream_Backend_application
 {
@@ -38,7 +40,8 @@ namespace Livestream_Backend_application
             services.AddDbContext<LivestreamDBContext>(options => options.UseSqlServer(connection));
             services.AddControllers();
             services.AddIdentityServices(Configuration);
-         
+            services.AddSingleton<IUserStreamService, UserStreamService>();
+            services.AddSingleton<IDbContext>(new ContextFactory(Configuration.GetConnectionString("LivestreamDataBase")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
