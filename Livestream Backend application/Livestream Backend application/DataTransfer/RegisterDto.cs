@@ -21,7 +21,6 @@ namespace Livestream_Backend_application.DataTransfer
         [Required]
         [RegularExpression("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$", ErrorMessage = "Password Must Have 6 Characters and contain atleast on Normal, Capital and Special Character")]
         public string   Password{ get; set; }
-
-        public string?  StreamKey  { get; set; }
+        public string  StreamKey  { get; set; }
     }
 }

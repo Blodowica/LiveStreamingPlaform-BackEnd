@@ -33,7 +33,7 @@ namespace Livestream_Backend_application.Services
                      x.Title,
                      x.Description,
                      x.UserId,
-                     x.AppUser.FirstName,
+                   
                      
 
                  }).FirstOrDefaultAsync();
@@ -46,7 +46,7 @@ namespace Livestream_Backend_application.Services
                 Title = s.Title,
                 Description = s.Description,
                 UserId = s.UserId,
-                FirstName = s.FirstName
+                
                 
 
             };

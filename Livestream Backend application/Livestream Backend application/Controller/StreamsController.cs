@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Livestream_Backend_application.Models;
 using Livestream_Backend_application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Livestream_Backend_application.Controller
 {
@@ -50,7 +51,7 @@ namespace Livestream_Backend_application.Controller
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<ActionResult<AppStreams>> PutStreams(int id, AppStreams streams)
-        {
+                {
             try
             {
             var foundStream = await _context.Streams.FirstOrDefaultAsync(u => u.StreamId == id);

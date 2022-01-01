@@ -13,7 +13,7 @@ namespace Livestream_Backend_application.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public string FirstName  { get; set; }
+      
 
     }
 }

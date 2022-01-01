@@ -52,7 +52,7 @@ namespace Livestream_Backend_application.Models
 
                 entity.Property(e => e.Title)
                     .HasColumnName("title")
-                    .HasMaxLength(20)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
     
