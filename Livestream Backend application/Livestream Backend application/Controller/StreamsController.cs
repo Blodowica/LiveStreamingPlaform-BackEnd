@@ -49,32 +49,33 @@ namespace Livestream_Backend_application.Controller
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStreams(int id, Streams streams)
+        public async Task<ActionResult<AppStreams>> PutStreams(int id, AppStreams streams)
         {
-            if (id != streams.  StreamId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(streams).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
+            var foundStream = await _context.Streams.FirstOrDefaultAsync(u => u.StreamId == id);
+            if (foundStream == null)
             {
-                if (!StreamsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("No user found with given id");
             }
+                foundStream.StreamId = streams.StreamId;
+                foundStream.Title = streams.Title;
+                foundStream.Description = streams.Description ;
+                foundStream.UserId = streams.UserId;
 
-            return NoContent();
+            _context.Update(foundStream);
+            await _context.SaveChangesAsync();
+
+            return foundStream;
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { message = ex.Message });
+            }
+          
+
         }
 
         // POST: api/Streams
