@@ -32,6 +32,7 @@ namespace Livestream_Backend_application.Controller
         
         // GET: api/Users/5
         [HttpGet("{id}")]
+        //[AllowAnonymous]
         public async Task<ActionResult<AppUser>> GetUsers(string id)
         {
             var users = await _context.appUsers.FindAsync(id);

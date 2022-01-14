@@ -98,7 +98,8 @@ namespace Livestream_Backend_application.Controller
                 LastName = user.Lastname,
                 Email= user.Email,
                 Image = null,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                StreamKey = user.StreamKey
                 
             };
         }

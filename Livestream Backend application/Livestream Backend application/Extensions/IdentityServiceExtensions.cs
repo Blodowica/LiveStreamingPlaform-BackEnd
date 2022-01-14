@@ -23,6 +23,9 @@ namespace Livestream_Backend_application.Extensions
             services.AddIdentityCore<AppUser>(opt =>
            {
                opt.Password.RequireNonAlphanumeric = false;
+               opt.Password.RequireUppercase = false;
+              opt.Password.RequireDigit = false;
+               opt.Password.RequireLowercase = false;
 
            })
                 .AddEntityFrameworkStores<LivestreamDBContext>()
