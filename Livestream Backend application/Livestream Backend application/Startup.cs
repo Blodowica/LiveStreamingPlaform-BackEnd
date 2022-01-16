@@ -49,7 +49,7 @@ namespace Livestream_Backend_application
             services.AddSignalR(o =>
             {
                 o.EnableDetailedErrors = true;
-            });
+            }).AddAzureSignalR();
             services.AddSingleton<IUserStreamService, UserStreamService>();
             services.AddSingleton<IDbContext>(new ContextFactory(Configuration.GetConnectionString("LivestreamDataBase")));
 
