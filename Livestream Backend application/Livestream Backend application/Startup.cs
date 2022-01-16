@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using MediatR; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,9 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Livestream_Backend_application.AppContext;
 using Livestream_Backend_application.Services.Interfaces;
 using Livestream_Backend_application.Services;
+using Livestream_Backend_application.SignalR;
+using Livestream_Backend_application.SignalR.Comments;
+using Reactivities.Application.Comments;
 
 namespace Livestream_Backend_application
 {
@@ -34,14 +38,21 @@ namespace Livestream_Backend_application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var Origin = "http://localhost:3000";
+
             services.AddControllers();
 
             var connection = Configuration.GetConnectionString("LivestreamDataBase");
-            services.AddDbContext<LivestreamDBContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<LivestreamDBContext>(options =>                options.UseSqlServer(connection));
             services.AddControllers();
             services.AddIdentityServices(Configuration);
+            services.AddSignalR(o =>
+            {
+                o.EnableDetailedErrors = true;
+            });
             services.AddSingleton<IUserStreamService, UserStreamService>();
             services.AddSingleton<IDbContext>(new ContextFactory(Configuration.GetConnectionString("LivestreamDataBase")));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -57,12 +68,17 @@ namespace Livestream_Backend_application
                     },
                 });
             });
+            services.AddMediatR(typeof(List.Handler).Assembly);
+           
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddScoped<IUserAccessor, UserAccessor>();
 
             services.AddCors(option =>
             {
                 option.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("*");
+                    policy.AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+                    .WithOrigins(Origin);
 
 
                 });
@@ -105,6 +121,7 @@ namespace Livestream_Backend_application
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
             //Try to apply migrations upon startup
             PrepDb.PrepMigration(app);

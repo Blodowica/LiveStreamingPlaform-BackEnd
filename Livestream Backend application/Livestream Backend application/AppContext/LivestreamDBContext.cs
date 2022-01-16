@@ -23,7 +23,9 @@ namespace Livestream_Backend_application.Models
         public virtual DbSet<AppStreams> Streams { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<AppUser> appUsers {get; set;}
-      
+
+        public DbSet<Comment> Comments  { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -122,8 +124,11 @@ namespace Livestream_Backend_application.Models
 
             });
 
-           
 
+            modelBuilder.Entity<Comment>()
+                .HasOne(s => s.Stream)
+                .WithMany(c => c.Comments)
+                .OnDelete(DeleteBehavior.Cascade);
          
 
            // OnModelCreatingPartial(modelBuilder);

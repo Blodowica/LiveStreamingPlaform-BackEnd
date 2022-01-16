@@ -13,5 +13,7 @@ namespace Livestream_Backend_application.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public AppUser AppUser { get; set; }
+
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
