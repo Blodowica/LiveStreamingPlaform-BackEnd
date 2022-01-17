@@ -79,7 +79,7 @@ namespace Livestream_Backend_application
                     policy.AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithOrigins(ALLOW_ORGIN_CORS);
+                    .WithOrigins(ALLOW_ORGIN_CORS, "https://rave-livestreams-s3ip.netlify.app/");
 
 
                 });
