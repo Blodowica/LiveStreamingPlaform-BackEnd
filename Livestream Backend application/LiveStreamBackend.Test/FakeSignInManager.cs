@@ -1,4 +1,4 @@
-﻿using Livestream_Backend_application.DataTransfer;
+﻿/*using Livestream_Backend_application.DataTransfer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -25,3 +25,4 @@ namespace LiveStreamBackend.Test
         }
     }
 }
+*/

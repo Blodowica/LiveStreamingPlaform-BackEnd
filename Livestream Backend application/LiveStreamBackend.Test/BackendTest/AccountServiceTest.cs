@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿/*using FluentAssertions;
 using Livestream_Backend_application.DataTransfer;
 using Livestream_Backend_application.Models;
 using Livestream_Backend_application.Services;
@@ -33,7 +33,7 @@ namespace LiveStreamBackend.Test
     {
 
         //private readonly SignInManager<AppUser> _signInManager;
-         private  TokenService _tokenService;
+        / private  TokenService _tokenService;
         private readonly IDbContextFactory<LivestreamDBContext> testContext;
         //  private readonly InjectFixture _injectFixture;
         private AccountService SUT;
@@ -48,7 +48,7 @@ namespace LiveStreamBackend.Test
         }
 
    // [Fact]
-/*    public async Task CreateCallsStore()
+*//*    public async Task CreateCallsStore()
     {
         // Setup
         var store = new Mock<IUserStore<AppUser>>();
@@ -64,7 +64,7 @@ namespace LiveStreamBackend.Test
         // Assert
         Assert.True(result.Succeeded);
         store.VerifyAll();
-    }*/
+    }*//*
 
 
         [Fact]
@@ -103,3 +103,4 @@ namespace LiveStreamBackend.Test
 }
 
 
+*/

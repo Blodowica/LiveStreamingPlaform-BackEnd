@@ -1,4 +1,4 @@
-﻿using Livestream_Backend_application.Services;
+﻿/*using Livestream_Backend_application.Services;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using System;
@@ -16,3 +16,4 @@ namespace LiveStreamBackend.Test
     }
 }
 
+*/
