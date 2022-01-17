@@ -5,3 +5,4 @@ rave livestream readme file
 
 # LiveStreamingPlaform-BackEnd
  
+Chatting works locally but the cors policy still nneeds to be updated
