@@ -31,5 +31,6 @@ namespace Livestream_Backend_application
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
