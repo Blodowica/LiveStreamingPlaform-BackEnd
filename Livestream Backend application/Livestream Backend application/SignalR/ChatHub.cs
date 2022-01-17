@@ -1,8 +1,8 @@
 ﻿using Livestream_Backend_application.Models;
 using Livestream_Backend_application.Services.Interfaces;
+using Livestream_Backend_application.SignalR.Comments;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
-using Reactivities.Application.Comments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +36,9 @@ namespace Livestream_Backend_application.SignalR
             await Groups.AddToGroupAsync(Context.ConnectionId, streamId);
             var result = await _mediator.Send(new List.Query { StreamId = Convert.ToInt32(streamId) });
             await Clients.Caller.SendAsync("LoadingComments", result.Value);
+
+          
+         
 
 
         }

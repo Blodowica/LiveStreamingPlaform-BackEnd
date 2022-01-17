@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Livestream_Backend_application.AppContext
 {
-    public class ContextFactory : IDesignTimeDbContextFactory<LivestreamDBContext>, IDbContext
+    public class ContextFactory : IDesignTimeDbContextFactory<LivestreamDBContext>, IDbContextFactory
     {
 
         public ContextFactory()

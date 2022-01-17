@@ -21,7 +21,6 @@ namespace Livestream_Backend_application.Models
 
         public virtual DbSet<Followers> Followers { get; set; }
         public virtual DbSet<AppStreams> Streams { get; set; }
-        public DbSet<Users> Users { get; set; }
         public DbSet<AppUser> appUsers {get; set;}
 
         public DbSet<Comment> Comments  { get; set; }

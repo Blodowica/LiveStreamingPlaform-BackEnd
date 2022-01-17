@@ -22,7 +22,6 @@ using Livestream_Backend_application.Services.Interfaces;
 using Livestream_Backend_application.Services;
 using Livestream_Backend_application.SignalR;
 using Livestream_Backend_application.SignalR.Comments;
-using Reactivities.Application.Comments;
 
 namespace Livestream_Backend_application
 {
@@ -51,7 +50,7 @@ namespace Livestream_Backend_application
                 o.EnableDetailedErrors = true;
             });
             services.AddSingleton<IUserStreamService, UserStreamService>();
-            services.AddSingleton<IDbContext>(new ContextFactory(Configuration.GetConnectionString("LivestreamDataBase")));
+            services.AddSingleton<IDbContextFactory>(new ContextFactory(Configuration.GetConnectionString("LivestreamDataBase")));
 
             services.AddSwaggerGen(c =>
             {
@@ -88,6 +87,7 @@ namespace Livestream_Backend_application
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleWare>();
             app.UseSwagger();
 
             app.UseSwaggerUI();
@@ -111,9 +111,9 @@ namespace Livestream_Backend_application
 
             app.UseHttpsRedirection();
             
-            app.UseCors("CorsPolicy");
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
 
             app.UseAuthorization();

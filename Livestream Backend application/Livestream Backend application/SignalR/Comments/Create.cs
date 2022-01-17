@@ -13,7 +13,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Reactivities.Application.Comments
+namespace Livestream_Backend_application.SignalR.Comments
 {
     public class Create
     {
@@ -22,6 +22,8 @@ namespace Reactivities.Application.Comments
 
             public string Body { get; set; }
             public int   StreamId { get; set; }
+
+            public AppUser Author { get; set; }
 
         }
 

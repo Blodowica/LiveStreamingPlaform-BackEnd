@@ -62,7 +62,7 @@ namespace Livestream_Backend_application.Extensions
                 
             //add TokenService
             services.AddScoped<TokenService>();
-
+            services.AddSignalR();
             return services;
           
         }

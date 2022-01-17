@@ -12,9 +12,9 @@ namespace Livestream_Backend_application.Services
 {
     public class UserStreamService : IUserStreamService
     {
-        private readonly IDbContext _livestreamDBContext;
+        private readonly IDbContextFactory _livestreamDBContext;
 
-        public UserStreamService(IDbContext livestreamDBContext)
+        public UserStreamService(IDbContextFactory livestreamDBContext)
         {
             _livestreamDBContext = livestreamDBContext;
         }

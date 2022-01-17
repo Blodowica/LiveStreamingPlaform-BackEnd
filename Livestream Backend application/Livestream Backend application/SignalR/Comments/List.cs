@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Reactivities.Application.Comments
+namespace Livestream_Backend_application.SignalR.Comments
 {
     public class List
     {

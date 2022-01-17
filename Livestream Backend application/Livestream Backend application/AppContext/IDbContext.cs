@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Livestream_Backend_application.AppContext
 {
-  public  interface IDbContext
+  public  interface IDbContextFactory
     {
         public LivestreamDBContext CreateDbContext(string[] args = null);
     }
