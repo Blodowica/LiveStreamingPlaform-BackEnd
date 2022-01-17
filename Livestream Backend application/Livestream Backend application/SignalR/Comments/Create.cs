@@ -23,7 +23,7 @@ namespace Livestream_Backend_application.SignalR.Comments
             public string Body { get; set; }
             public int   StreamId { get; set; }
 
-            public AppUser Author { get; set; }
+         
 
         }
 
@@ -55,7 +55,7 @@ namespace Livestream_Backend_application.SignalR.Comments
                 if (stream == null) return null;
 
                 var user = await _context.appUsers
-                    .SingleOrDefaultAsync(x => x.UserName == request.Author.UserName );
+                    .SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
                 var comment = new Comment
                 {

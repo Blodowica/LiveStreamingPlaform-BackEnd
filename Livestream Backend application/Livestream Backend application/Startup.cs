@@ -76,7 +76,9 @@ namespace Livestream_Backend_application
             {
                 option.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+                    policy.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
                     .WithOrigins(ALLOW_ORGIN_CORS);
 
 
