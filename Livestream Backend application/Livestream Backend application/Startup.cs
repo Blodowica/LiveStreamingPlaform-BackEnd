@@ -37,7 +37,7 @@ namespace Livestream_Backend_application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var Origin = "http://localhost:3000";
+            var ALLOW_ORGIN_CORS = "http://localhost:3000";
 
             services.AddControllers();
 
@@ -77,7 +77,7 @@ namespace Livestream_Backend_application
                 option.AddPolicy("CorsPolicy", policy =>
                 {
                     policy.AllowAnyMethod().AllowAnyHeader().AllowCredentials()
-                    .WithOrigins(Origin);
+                    .WithOrigins(ALLOW_ORGIN_CORS);
 
 
                 });
