@@ -1,4 +1,4 @@
-﻿/*using FluentAssertions;
+﻿using FluentAssertions;
 using Livestream_Backend_application.DataTransfer;
 using Livestream_Backend_application.Models;
 using Livestream_Backend_application.Services;
@@ -31,47 +31,76 @@ namespace LiveStreamBackend.Test
 {
     public class AccountServiceTest
     {
+     
 
-        //private readonly SignInManager<AppUser> _signInManager;
-        / private  TokenService _tokenService;
-        private readonly IDbContextFactory<LivestreamDBContext> testContext;
-        //  private readonly InjectFixture _injectFixture;
-        private AccountService SUT;
         public AccountServiceTest()
         {
-           //   _injectFixture = new InjectFixture();
-            //mock tokenService
-           _tokenService = new FakeTokenService();
-
-            var testContext = new TestContext();
-           // SUT = new AccountService(_injectFixture.UserManager, _injectFixture.SignInManager, _tokenService);
+           
+                
         }
 
-   // [Fact]
-*//*    public async Task CreateCallsStore()
-    {
-        // Setup
-        var store = new Mock<IUserStore<AppUser>>();
-        var user = new AppUser { UserName = "Foo" };
-        store.Setup(s => s.CreateAsync(user, CancellationToken.None)).ReturnsAsync(IdentityResult.Success).Verifiable();
-        store.Setup(s => s.GetUserNameAsync(user, CancellationToken.None)).Returns(Task.FromResult(user.UserName)).Verifiable();
-        store.Setup(s => s.SetNormalizedUserNameAsync(user, user.UserName.ToUpperInvariant(), CancellationToken.None)).Returns(Task.FromResult(0)).Verifiable();
-        var userManager = MockHelpers.TestUserManager<AppUser>(store.Object);
+         [Fact]
+        public async Task CreateUserTest()
+        {
+            // Setup
+            var store = new Mock<IUserStore<AppUser>>();
+            var user = new AppUser {  UserName = "foo" };
+            store.Setup(s => s.CreateAsync(user, CancellationToken.None)).ReturnsAsync(IdentityResult.Success).Verifiable();
+            store.Setup(s => s.GetUserNameAsync(user, CancellationToken.None)).Returns(Task.FromResult(user.UserName)).Verifiable();
+           // store.Setup(s => s.SetNormalizedUserNameAsync(user, user.UserName.ToUpperInvariant(), CancellationToken.None)).Returns(Task.FromResult(0)).Verifiable();
+            var userManager = MockHelpers.TestUserManager<AppUser>(store.Object);
 
-        // Act
-        var result = await userManager.CreateAsync(user);
+            // Act
+            var result = await userManager.CreateAsync(user);
 
-        // Assert
-        Assert.True(result.Succeeded);
-        store.VerifyAll();
-    }*//*
-
+            // Assert
+            Assert.True(result.Succeeded);
+            store.VerifyAll();
+        }
 
         [Fact]
-        public async Task RegisterAUserTest()
+        public async Task RegisterUserTest()
         {
+          
 
             var RegisterUser = new RegisterDto()
+            {
+                FirstName = "Jonny",
+                LastName = "Dragon",
+                Email = "Ez@gmail.com",
+                Password = "OpenSayzMe3",
+                StreamKey = "EzGamesSupersecretKey",
+                UserName = "EzGames"
+            };
+            var newUser = new AppUser()
+            {
+                FirstName = RegisterUser.FirstName,
+                UserName = RegisterUser.UserName,
+                Email = RegisterUser.Email,
+                StreamKey = RegisterUser.StreamKey,
+                Lastname = RegisterUser.LastName
+
+            };
+
+            var store = new Mock<IUserStore<AppUser>>();
+            store.Setup(s => s.CreateAsync(newUser, CancellationToken.None)).ReturnsAsync(IdentityResult.Success).Verifiable();
+            store.Setup(s => s.GetUserNameAsync(newUser, CancellationToken.None)).Returns(Task.FromResult(newUser.UserName)).Verifiable();
+            var userManager = MockHelpers.TestUserManager<AppUser>(store.Object);
+
+            var result = await userManager.CreateAsync(newUser);
+
+            Assert.True(result.Succeeded);
+
+
+        }
+       
+        [Fact]
+        public async Task RegisterUserThatAlreadyExist()
+        {
+
+           bool doubleUser = false;
+
+            var RegisterUser = new RegisterDto()    
             {
                 FirstName = "Eziek",
                 LastName = "Dragon",
@@ -90,17 +119,28 @@ namespace LiveStreamBackend.Test
                 Lastname = RegisterUser.LastName
 
             };
+            var store = new Mock<IUserStore<AppUser>>();
+            store.Setup(s => s.CreateAsync(user, CancellationToken.None)).ReturnsAsync(IdentityResult.Success).Verifiable();
+            store.Setup(s => s.GetUserNameAsync(user, CancellationToken.None)).Returns(Task.FromResult(user.UserName)).Verifiable();
+            store.Setup(s => s.FindByIdAsync(user.Id, CancellationToken.None)).Returns(Task.FromResult(user)).Verifiable();
 
-            Assert.NotNull(user);
+            var userManager = MockHelpers.TestUserManager<AppUser>(store.Object);
+             await userManager.CreateAsync(user);
+            var foundUser = await userManager.FindByIdAsync(user.Id);
+            if (foundUser == null)
+            {
+                 doubleUser = true;
+            }
+            else
+            {
+                doubleUser = false;
+            }
 
+            Assert.False(doubleUser);
 
-            //Act
-
-            //Assert
         }
-   
+
     }
 }
 
 
-*/
