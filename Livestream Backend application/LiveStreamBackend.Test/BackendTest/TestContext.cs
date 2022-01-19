@@ -1,4 +1,4 @@
-﻿/*using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace LiveStreamBackend.Test
 {
-    public class TestContext : IDesignTimeDbContextFactory<LivestreamDBContext>
+    public class TestContext : IDbContextFactory<LivestreamDBContext>
     {
         public DbContextOptions<LivestreamDBContext> options { get; private set; }
 
@@ -29,7 +29,7 @@ namespace LiveStreamBackend.Test
         }
     }
 
-
+/*
     public class TestContextFactory : IDesignTimeDbContextFactory<LivestreamDBContext>
     {
         public DbContextOptions<LivestreamDBContext> options { get; private set; }
@@ -43,9 +43,8 @@ namespace LiveStreamBackend.Test
 
         public LivestreamDBContext CreateDbContext()
         {
-            return new LivestreamDBContext(options);    
+            return new LivestreamDBContext(options);
         }
-    }
+    }*/
 
 }
-*/
