@@ -1,4 +1,4 @@
-﻿using Livestream_Backend_application.DataTransfer;
+﻿/*using Livestream_Backend_application.DataTransfer;
 using Livestream_Backend_application.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Livestream_Backend_application.Services
 {
-    public class AccountService : IAccountService
+    public class AccountService
     {
         private readonly UserManager<AppUser> _userManger;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly TokenService _tokenService;
-
+*//*
         public AccountService(UserManager<AppUser> userManger, SignInManager<AppUser> signInManager, TokenService tokenService)
         {
             _userManger = userManger;
             _signInManager = signInManager;
             _tokenService = tokenService;
-        }
+        }*//*
 
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
@@ -65,3 +65,4 @@ namespace Livestream_Backend_application.Services
        
     }
 }
+*/
