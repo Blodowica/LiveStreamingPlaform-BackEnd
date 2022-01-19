@@ -1,5 +1,4 @@
-﻿using Livestream_Backend_application.AppContext;
-using Livestream_Backend_application.DataTransfer;
+﻿using Livestream_Backend_application.DataTransfer;
 using Livestream_Backend_application.Models;
 using Livestream_Backend_application.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -12,15 +11,15 @@ namespace Livestream_Backend_application.Services
 {
     public class UserStreamService : IUserStreamService
     {
-        private readonly IDbContextFactory _livestreamDBContext;
+        private readonly IDbContextFactory<LivestreamDBContext> _livestreamDBContext;
+      
 
-        public UserStreamService(IDbContextFactory livestreamDBContext)
+        public UserStreamService(IDbContextFactory<LivestreamDBContext> livestreamDBContext)
         {
             _livestreamDBContext = livestreamDBContext;
         }
 
 
-       
         public async Task<GetUserStreamResponse> getUserStreamResponse(string userId)
         {
             using var db = _livestreamDBContext.CreateDbContext();
@@ -33,8 +32,6 @@ namespace Livestream_Backend_application.Services
                      x.Title,
                      x.Description,
                      x.UserId,
-                   
-                     
 
                  }).FirstOrDefaultAsync();
             if (s == null) return null;

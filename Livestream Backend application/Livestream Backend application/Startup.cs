@@ -38,8 +38,13 @@ namespace Livestream_Backend_application
         public void ConfigureServices(IServiceCollection services)
         {
             var ALLOW_ORGIN_CORS = "http://localhost:3000";
+            services.AddDbContextFactory<LivestreamDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("LivestreamDataBase"));
+            });
 
             services.AddControllers();
+            services.AddSingleton<IUserStreamService, UserStreamService>();
 
             var connection = Configuration.GetConnectionString("LivestreamDataBase");
             services.AddDbContext<LivestreamDBContext>(options =>                options.UseSqlServer(connection));

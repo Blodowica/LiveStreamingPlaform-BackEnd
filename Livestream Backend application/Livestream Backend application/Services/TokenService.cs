@@ -34,7 +34,7 @@ namespace Livestream_Backend_application.Services
           };
 
 
-            //creating a key, credntials and descriptor for the tokens
+            //creating a key, credentials and decrypter for the tokens
 
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["TokenKey"]));
@@ -43,7 +43,7 @@ namespace Livestream_Backend_application.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7), //later refresh tokens 
+                Expires = DateTime.Now.AddDays(7), 
                 SigningCredentials = creds
             };
 

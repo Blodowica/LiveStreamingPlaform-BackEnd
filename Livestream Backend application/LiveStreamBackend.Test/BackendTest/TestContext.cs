@@ -23,28 +23,7 @@ namespace LiveStreamBackend.Test
             return new LivestreamDBContext(options);
         }
 
-        public LivestreamDBContext CreateDbContext(string[] args)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
-
-/*
-    public class TestContextFactory : IDesignTimeDbContextFactory<LivestreamDBContext>
-    {
-        public DbContextOptions<LivestreamDBContext> options { get; private set; }
-
-        public TestContextFactory()
-        {
-            options = new DbContextOptionsBuilder<LivestreamDBContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
-        }
-
-        public LivestreamDBContext CreateDbContext()
-        {
-            return new LivestreamDBContext(options);
-        }
-    }*/
 
 }
