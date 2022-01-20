@@ -59,6 +59,8 @@ namespace Livestream_Backend_application.Controller
             foundUser.FirstName = users.FirstName;
             foundUser.Lastname = users.Lastname;
             foundUser.Email = users.Email;
+            foundUser.NormalizedEmail = users.Email.ToUpper();
+            foundUser.NormalizedUserName = users.UserName.ToUpper();
             foundUser.UserName = users.UserName;
 
             _context.Update(foundUser);
