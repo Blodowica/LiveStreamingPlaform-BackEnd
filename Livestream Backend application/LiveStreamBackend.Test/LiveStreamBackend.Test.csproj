@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Livestream Backend application\Livestream Backend application.csproj" />
+    <ProjectReference Include="..\Livestream Backend application\Livestream-Backend-application.csproj" />
   </ItemGroup>
 
 </Project>
